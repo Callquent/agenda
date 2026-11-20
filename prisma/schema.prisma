@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Une application liée à l'agenda (plantes, tâches ménagères, ...).
+// Elle fournit ses dates par GET <application>/api/agenda?from=YYYY-MM-DD&to=YYYY-MM-DD.
+model Source {
+  id         String    @id @default(cuid())
+  name       String
+  appId      String    @default("")
+  customUrl  String    @default("")
+  feedPath   String    @default("/api/agenda")
+  color      String    @default("#3b82f6")
+  enabled    Boolean   @default(true)
+  lastSyncAt DateTime?
+  lastError  String    @default("")
+  createdAt  DateTime  @default(now())
+  events     Event[]
+}
+
+// Dates : texte « YYYY-MM-DD » (pas de fuseau horaire à gérer). sourceId vide = événement créé dans l'agenda.
+model Event {
+  id        String   @id @default(cuid())
+  title     String
+  date      String
+  endDate   String   @default("")
+  time      String   @default("")
+  notes     String   @default("")
+  category  String   @default("")
+  status    String   @default("todo")
+  color     String   @default("")
+  path      String   @default("")
+  // Répétition (événements créés dans l'agenda) : tous les X jours OU jours de la semaine (0 = dimanche … 6 = samedi)
+  repeatEvery Int      @default(0)
+  repeatDays  String   @default("")
+  repeatUntil String   @default("")
+  doneOn      String   @default("") // jours « faits » d'une série répétée : « 2026-11-23,2026-11-25 »
+  sourceId  String?
+  source    Source?  @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([date])
+  @@index([sourceId, date])
+}
+
+// Réglages de l'application (clé -> valeur JSON), ex. « notify » pour les notifications du téléphone.
+model Setting {
+  key   String @id
+  value String @default("")
+}
+
+// Appareils (téléphone, ordinateur…) qui reçoivent les notifications du jour. L'adresse « endpoint » est celle du
+// service de notification du navigateur (Google, Mozilla, Apple…) : elle ne sert qu'à lui envoyer les messages.
+model PushSub {
+  id        String   @id @default(cuid())
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  label     String   @default("")
+  createdAt DateTime @default(now())
+}
