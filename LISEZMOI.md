@@ -1,17 +1,17 @@
 # Agenda (Next.js + Prisma + SQLite)
 
-Un agenda mensuel qui **rassemble les dates de vos autres applications**. Quand on lie une application
+Un agenda (vue **Semaine** par défaut, vue **Mois** en option, panneau « jour » toujours visible) qui **rassemble les dates de vos autres applications**. Quand on lie une application
 (Mes plantes, Tâches ménagères…), ses dates s'ajoutent à l'agenda et restent à jour ; quand on la délie,
 elles disparaissent. On peut aussi y créer ses propres événements.
 
-## Installer dans « MaPetiteBoîte »
+## Installer dans « Triviae »
 1. Importez `agenda.zip` (identifiant **agenda**), puis, **dans le même temps, réimportez `plantes.zip` et
    `taches.zip`** : ce sont vos applications avec un fichier de plus (`/api/agenda`). Leurs données sont conservées.
 2. Ouvrez l'agenda > **Applications liées** > **Lier une application**.
-   L'agenda retrouve tout seul « MaPetiteBoîte » (ports 8080 à 8089). Si le port est inhabituel, définissez `HUB_URL`.
+   L'agenda retrouve tout seul « Triviae » (ports 8080 à 8089). Si le port est inhabituel, définissez `HUB_URL`.
 
-## Page « Liens » de MaPetiteBoîte
-L'agenda expose `GET /api/liens` : la liste des applications qui lui fournissent leurs dates. L'onglet **Liens** de MaPetiteBoîte
+## Page « Liens » de Triviae
+L'agenda expose `GET /api/liens` : la liste des applications qui lui fournissent leurs dates. L'onglet **Liens** de Triviae
 l'affiche (schéma animé et détail « reçoit des données de… »).
 
 ## Lancer seul (développement)
@@ -47,11 +47,11 @@ Les notifications du jour tiennent compte des événements répétés.
 ## Notifications du téléphone (sans application)
 Page **Notifications** : une fois par jour, à l'heure choisie, l'agenda envoie la liste des tâches du jour (à faire et en retard)
 sous forme de **notification du navigateur** (Web Push). Rien n'est envoyé si la journée est vide.
-- Une fois par téléphone : **HTTPS** est nécessaire. « MaPetiteBoîte » le propose déjà : installer son certificat
+- Une fois par téléphone : **HTTPS** est nécessaire. « Triviae » le propose déjà : installer son certificat
   (page « Copie sur le téléphone », ouverte depuis le téléphone), puis ouvrir `https://<adresse du PC>:<port>/apps/agenda/notifications`
   et toucher « Activer les notifications ici ». Sur iPhone : iOS 16.4 minimum et agenda ajouté à l'écran d'accueil.
 - Un minuteur interne (`instrumentation.ts` > `lib/scheduler.ts`) vérifie chaque minute ; si le PC était éteint à l'heure prévue,
-  l'envoi part dès qu'il est rallumé, le même jour. « MaPetiteBoîte » doit donc être lancé (option « Démarrer avec l'ordinateur »).
+  l'envoi part dès qu'il est rallumé, le même jour. « Triviae » doit donc être lancé (option « Démarrer avec l'ordinateur »).
 - Le message passe par le service de notification du navigateur (Google, Mozilla, Apple, Microsoft), chiffré : le PC doit avoir internet.
 - Les clés du serveur (VAPID) sont créées au premier usage et conservées dans la base ; `VAPID_SUBJECT` (mailto:…) est facultatif.
 - Appareils : liste et retrait sur la même page ; un appareil désabonné par son navigateur est retiré automatiquement.

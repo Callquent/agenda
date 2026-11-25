@@ -41,7 +41,7 @@ export async function fetchFeed(src: Pick<Source, "appId" | "customUrl" | "feedP
   if (!base) {
     throw new Error(
       src.appId
-        ? "« MaPetiteBoîte » est introuvable depuis l'agenda (variable HUB_URL à définir si le port est inhabituel)."
+        ? "« Triviae » est introuvable depuis l'agenda (variable HUB_URL à définir si le port est inhabituel)."
         : "Adresse de l'application manquante.",
     );
   }
@@ -60,7 +60,7 @@ export async function fetchFeed(src: Pick<Source, "appId" | "customUrl" | "feedP
     if (src.appId) {
       const ids = (await hubApps()).map((a) => a.id);
       if (!ids.includes(src.appId)) {
-        throw new Error(`Aucune application « ${src.appId} » dans MaPetiteBoîte (trouvées : ${ids.join(", ") || "aucune"}). Corrigez l'identifiant.`);
+        throw new Error(`Aucune application « ${src.appId} » dans Triviae (trouvées : ${ids.join(", ") || "aucune"}). Corrigez l'identifiant.`);
       }
     }
     throw new Error("L'application n'a pas de flux /api/agenda : réimportez-la avec la version qui le fournit (plantes.zip / taches.zip).");

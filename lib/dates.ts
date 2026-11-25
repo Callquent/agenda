@@ -73,3 +73,25 @@ export function formatDay(iso: string): string {
 
 export const formatMonth = (year: number, month: number) =>
   `${MONTHS[month - 1].charAt(0).toUpperCase()}${MONTHS[month - 1].slice(1)} ${year}`;
+
+/** Lundi de la semaine qui contient `iso`. */
+export function mondayOf(iso: string): string {
+  return addDays(iso, -((utc(iso).getUTCDay() + 6) % 7));
+}
+
+export function isoWeek(iso: string): number {
+  const d = utc(iso);
+  d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7) + 3); // jeudi de la semaine
+  const jan4 = new Date(Date.UTC(d.getUTCFullYear(), 0, 4));
+  return 1 + Math.round(((d.getTime() - jan4.getTime()) / 864e5 - 3 + ((jan4.getUTCDay() + 6) % 7)) / 7);
+}
+
+/** « 23 – 29 novembre 2026 » ou « 30 nov. – 6 déc. 2026 ». */
+export function formatWeekRange(start: string, end: string): string {
+  const [ys, ms, ds] = start.split("-").map(Number);
+  const [ye, me, de] = end.split("-").map(Number);
+  const mon = (m: number, short: boolean) => (short ? MONTHS[m - 1].slice(0, 3) + "." : MONTHS[m - 1]);
+  const short = ms !== me || ys !== ye;
+  const left = `${ds}${ys !== ye ? ` ${mon(ms, true)} ${ys}` : short ? ` ${mon(ms, true)}` : ""}`;
+  return `${left} – ${de} ${mon(me, short)} ${ye}`;
+}

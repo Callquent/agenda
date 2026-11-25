@@ -1,4 +1,4 @@
-// Dialogue avec « MaPetiteBoîte » (le hub) : les applications y vivent sous /apps/<identifiant>.
+// Dialogue avec « Triviae » (le hub) : les applications y vivent sous /apps/<identifiant>.
 // Depuis le serveur de l'agenda, le hub est joignable sur 127.0.0.1 ; son port est 8080 (ou le suivant si occupé).
 
 const g = globalThis as typeof globalThis & { __agendaHub?: { url: string | null; at: number } };

@@ -7,8 +7,8 @@ export default function AddEvent({ date }: { date: string }) {
   const [open, setOpen] = useState(false);
   if (!open) {
     return (
-      <button className="btn" onClick={() => setOpen(true)}>
-        + Ajouter un événement
+      <button className="btn small" onClick={() => setOpen(true)}>
+        + Ajouter
       </button>
     );
   }

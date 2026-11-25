@@ -11,7 +11,7 @@ export default function LinkApp({ presets, hubIds, hubFound }: { presets: Preset
   const [open, setOpen] = useState(false);
   const [choice, setChoice] = useState(presets[0].key);
   const preset = presets.find((p) => p.key === choice);
-  // Identifiant réellement installé dans « MaPetiteBoîte » (ex. taches-menageres), sinon celui par défaut
+  // Identifiant réellement installé dans « Triviae » (ex. taches-menageres), sinon celui par défaut
   const presetId = preset ? (hubIds.find((id) => id.includes(preset.match)) ?? preset.appId) : "";
   const [color, setColor] = useState(presets[0].color);
   const [error, setError] = useState("");
@@ -73,7 +73,7 @@ export default function LinkApp({ presets, hubIds, hubFound }: { presets: Preset
           <input name="name" required maxLength={80} defaultValue={preset?.name ?? ""} />
         </label>
         <label>
-          Identifiant dans « MaPetiteBoîte »
+          Identifiant dans « Triviae »
           <input name="appId" list="hub-ids" defaultValue={presetId} placeholder="ex. plantes" autoCapitalize="none" />
           <datalist id="hub-ids">{hubIds.map((id) => <option key={id} value={id} />)}</datalist>
         </label>
@@ -87,9 +87,9 @@ export default function LinkApp({ presets, hubIds, hubFound }: { presets: Preset
       <p className="muted" style={{ margin: 0 }}>
         {hubFound
           ? hubIds.length
-            ? `Applications trouvées dans MaPetiteBoîte : ${hubIds.join(", ")}.`
-            : "Aucune application installée dans MaPetiteBoîte."
-          : "« MaPetiteBoîte » n'a pas été trouvé depuis l'agenda : utilisez une adresse complète."}
+            ? `Applications trouvées dans Triviae : ${hubIds.join(", ")}.`
+            : "Aucune application installée dans Triviae."
+          : "« Triviae » n'a pas été trouvé depuis l'agenda : utilisez une adresse complète."}
       </p>
       <div className="swatches" role="group" aria-label="Couleur">
         {PALETTE.map((c) => (

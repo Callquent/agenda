@@ -106,7 +106,7 @@ export default function PushPanel({ enabled: initialEnabled, time: initialTime, 
             </p>
             <ol style={{ margin: 0, paddingLeft: 20 }}>
               <li>
-                Installez le certificat du PC sur ce téléphone : <a href={certUrl}>page « Copie sur le téléphone » de MaPetiteBoîte</a> (suivez l'étape « Installez le certificat »).
+                Installez le certificat du PC sur ce téléphone : <a href={certUrl}>page « Copie sur le téléphone » de Triviae</a> (suivez l'étape « Installez le certificat »).
               </li>
               <li>
                 Rouvrez cette page en version sécurisée : <a href={secureUrl}>{secureUrl}</a>

@@ -5,7 +5,7 @@ import { PRESETS } from "@/lib/sources";
 export const dynamic = "force-dynamic";
 
 /**
- * Liens de l'agenda avec les autres applications, lus par la page « Liens » de MaPetiteBoîte.
+ * Liens de l'agenda avec les autres applications, lus par la page « Liens » de Triviae.
  * Chaque application liée fournit ses dates à l'agenda : direction « in » (l'agenda reçoit).
  */
 export async function GET() {

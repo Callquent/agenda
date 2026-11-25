@@ -1,4 +1,4 @@
-// BASE_PATH (ex. /apps/agenda) et STANDALONE=1 sont fournis par « MaPetiteBoîte ».
+// BASE_PATH (ex. /apps/agenda) et STANDALONE=1 sont fournis par « Triviae ».
 // Sans ces variables, l'application se compile et se lance normalement (npm run dev, npm start).
 const basePath = process.env.BASE_PATH ?? "";
 
